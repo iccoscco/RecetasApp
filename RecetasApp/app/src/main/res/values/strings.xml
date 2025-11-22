@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Cocina Total</string>
+    <string name="splash_subtitle">Tu Asistente Inteligente de Recetas Caseras</string>
+
+    <!-- Bottom Navigation -->
+    <string name="home">Inicio</string>
+    <string name="search">Buscar</string>
+    <string name="community">Comunidad</string>
+    <string name="profile">Perfil</string>
+
+    <!-- Navigation Drawer -->
+    <string name="categories">Categorías</string>
+    <string name="favorites">Favoritos</string>
+    <string name="shopping_list">Lista de Compras</string>
+    <string name="weekly_plan">Planificación Semanal</string>
+    <string name="stores">Tiendas</string>
+    <string name="settings">Configuración</string>
+    <string name="my_recipes">Mis Recetas</string>
+
+    <!-- Auth -->
+    <string name="welcome">Bienvenido</string>
+    <string name="welcome_title">Descubre el mundo de la cocina</string>
+    <string name="login_description">Explora recetas, planifica comidas y comparte tus creaciones culinarias.</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="continue_facebook">Continuar con Facebook</string>
+    <string name="continue_google">Continuar con Google</string>
+    <string name="continue_guest">Continuar como invitado</string>
+    <string name="no_account_register">¿No tienes una cuenta? Regístrate</string>
+    <string name="have_account_login">¿Ya tienes cuenta? Inicia sesión</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+
+    <!-- Home -->
+    <string name="recommended_recipes">Recetas recomendadas</string>
+    <string name="search_recipes">Buscar recetas</string>
+    <string name="see_all">Ver todas</string>
+
+    <!-- Recipe Detail -->
+    <string name="recipe_detail">Detalle de Receta</string>
+    <string name="difficulty">Dificultad</string>
+    <string name="time">Tiempo</string>
+    <string name="servings">Porciones</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="preparation">Preparación</string>
+    <string name="instructions">Instrucciones</string>
+    <string name="nutritional_info">Información Nutricional</string>
+    <string name="calories">Calorías</string>
+    <string name="proteins">Proteínas</string>
+    <string name="carbohydrates">Carbohidratos</string>
+    <string name="fats">Grasas</string>
+    <string name="add_favorites">Agregar a Favoritos</string>
+    <string name="remove_favorites">Quitar de Favoritos</string>
+    <string name="cooking_mode">Modo Manos Libres</string>
+    <string name="start_cooking">Comenzar a cocinar</string>
+    <string name="add_to_shopping_list">Agregar a lista de compras</string>
+    <string name="share_recipe">Compartir receta</string>
+    <string name="recipe_image">Imagen de receta</string>
+    <string name="rating">Calificación</string>
+
+    <!-- Search -->
+    <string name="filter">Filtrar</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="category">Categoría</string>
+    <string name="area">Región</string>
+    <string name="preparation_time">Tiempo de preparación</string>
+    <string name="max_calories">Calorías máximas</string>
+    <string name="apply_filters">Aplicar filtros</string>
+    <string name="clear_filters">Limpiar filtros</string>
+    <string name="no_results">No se encontraron resultados</string>
+
+    <!-- Profile -->
+    <string name="edit_profile">Editar perfil</string>
+    <string name="culinary_goal">Objetivo culinario</string>
+    <string name="recipes_saved">Recetas guardadas</string>
+    <string name="recipes_uploaded">Recetas subidas</string>
+    <string name="weekly_menus">Menús semanales</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="delete_account">Eliminar cuenta</string>
+
+    <!-- Community -->
+    <string name="upload_recipe">Subir receta</string>
+    <string name="following">Siguiendo</string>
+    <string name="for_you">Para ti</string>
+    <string name="recipes">Recetas</string>
+    <string name="like">Me gusta</string>
+    <string name="comment">Comentar</string>
+    <string name="comments">Comentarios</string>
+    <string name="user_avatar">Avatar de usuario</string>
+
+    <!-- Shopping List -->
+    <string name="fruits">Frutas</string>
+    <string name="vegetables">Verduras</string>
+    <string name="meats">Carnes</string>
+    <string name="seafood">Pescados y Mariscos</string>
+    <string name="dairy">Lácteos</string>
+    <string name="bakery">Panadería</string>
+    <string name="groceries">Abarrotes</string>
+    <string name="condiments">Condimentos y Especias</string>
+    <string name="beverages">Bebidas</string>
+    <string name="others">Otros</string>
+    <string name="export_list">Exportar lista</string>
+    <string name="share_list">Compartir lista</string>
+    <string name="clear_list">Limpiar lista</string>
+    <string name="export">Exportar</string>
+    <string name="clear">Limpiar</string>
+
+    <!-- Weekly Plan -->
+    <string name="monday">Lunes</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miércoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+    <string name="saturday">Sábado</string>
+    <string name="sunday">Domingo</string>
+    <string name="breakfast">Desayuno</string>
+    <string name="lunch">Almuerzo</string>
+    <string name="dinner">Cena</string>
+    <string name="add_meal">Agregar comida</string>
+    <string name="generate_shopping_list">Generar lista de compras semanal</string>
+
+    <!-- Stores -->
+    <string name="nearby_stores">Tiendas cercanas</string>
+    <string name="how_to_get_there">Cómo llegar</string>
+    <string name="distance">Distancia</string>
+
+    <!-- Settings -->
+    <string name="account">Cuenta</string>
+    <string name="preferences">Preferencias</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="units">Unidades de medida</string>
+    <string name="language">Idioma</string>
+    <string name="theme">Tema</string>
+    <string name="light">Claro</string>
+    <string name="dark">Oscuro</string>
+    <string name="system">Sistema</string>
+    <string name="metric">Métrico</string>
+    <string name="imperial">Imperial</string>
+    <string name="privacy">Privacidad</string>
+    <string name="storage">Almacenamiento</string>
+    <string name="about">Acerca de</string>
+    <string name="version">Versión</string>
+
+    <!-- Upload Recipe -->
+    <string name="recipe_title">Título de la receta</string>
+    <string name="recipe_description">Descripción</string>
+    <string name="recipe_photo">Foto de la receta</string>
+    <string name="upload_photo">Subir foto</string>
+    <string name="take_photo">Tomar foto</string>
+    <string name="add_ingredient">Agregar ingrediente</string>
+    <string name="add_step">Agregar paso</string>
+    <string name="select_category">Seleccionar categoría</string>
+    <string name="tags">Etiquetas</string>
+    <string name="save_draft">Guardar borrador</string>
+    <string name="publish">Publicar</string>
+
+    <!-- Cooking Mode -->
+    <string name="step">Paso</string>
+    <string name="of">de</string>
+    <string name="next_step">Siguiente paso</string>
+    <string name="previous_step">Paso anterior</string>
+    <string name="finish_cooking">Finalizar</string>
+    <string name="finish">Finalizar</string>
+    <string name="timer">Temporizador</string>
+    <string name="minutes">Minutos</string>
+    <string name="seconds">Segundos</string>
+    <string name="voice_command">Comando de voz</string>
+
+    <!-- Common -->
+    <string name="loading">Cargando…</string>
+    <string name="error">Error</string>
+    <string name="success">Éxito</string>
+    <string name="retry">Reintentar</string>
+    <string name="no_internet">Sin conexión a Internet</string>
+    <string name="cancel">Cancelar</string>
+    <string name="accept">Aceptar</string>
+    <string name="ok">OK</string>
+    <string name="save">Guardar</string>
+    <string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
+    <string name="done">Hecho</string>
+    <string name="close">Cerrar</string>
+    <string name="back">Atrás</string>
+    <string name="next">Siguiente</string>
+    <string name="skip">Omitir</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="all">Todos</string>
+    <string name="none">Ninguno</string>
+
+    <!-- Messages -->
+    <string name="login_success">Inicio de sesión exitoso</string>
+    <string name="register_success">Registro exitoso</string>
+    <string name="logout_success">Sesión cerrada</string>
+    <string name="recipe_saved">Receta guardada</string>
+    <string name="recipe_removed">Receta eliminada</string>
+    <string name="copied_to_clipboard">Copiado al portapapeles</string>
+    <string name="shared_successfully">Compartido exitosamente</string>
+
+    <!-- Errors -->
+    <string name="error_empty_email">Ingresa tu email</string>
+    <string name="error_invalid_email">Email inválido</string>
+    <string name="error_empty_password">Ingresa tu contraseña</string>
+    <string name="error_short_password">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_passwords_dont_match">Las contraseñas no coinciden</string>
+    <string name="error_login_failed">Error al iniciar sesión</string>
+    <string name="error_register_failed">Error al registrarse</string>
+    <string name="error_load_recipes">Error al cargar recetas</string>
+    <string name="error_network">Error de conexión</string>
+    <string name="error_unknown">Error desconocido</string>
+</resources>

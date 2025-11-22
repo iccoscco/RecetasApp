@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="24dp" />
+
+        <!-- CUENTA -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/green_primary"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/edit_profile_option"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/edit_profile"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light" />
+
+        <!-- PREFERENCIAS -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preferences"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/green_primary"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Modo Oscuro -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Modo Oscuro"
+                android:textSize="16sp"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/dark_mode_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:thumbTint="@color/white"
+                app:trackTint="@color/gray_medium" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light" />
+
+        <!-- Notificaciones -->
+        <TextView
+            android:id="@+id/notifications_option"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/notifications"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light" />
+
+        <!-- Idioma -->
+        <TextView
+            android:id="@+id/language_option"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/language"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light" />
+
+        <!-- ACERCA DE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/green_primary"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/about_option"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/about"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light" />
+
+        <!-- Versión -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/version"
+            android:textSize="16sp"
+            android:textColor="@color/gray_medium"
+            android:gravity="center_vertical"
+            android:padding="12dp" />
+
+        <TextView
+            android:id="@+id/version_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.0.0"
+            android:textSize="14sp"
+            android:textColor="@color/gray_medium"
+            android:gravity="center"
+            android:padding="12dp" />
+
+    </LinearLayout>
+
+</ScrollView>

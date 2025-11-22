@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
+        
+        <item
+            android:id="@+id/favoritesFragment"
+            android:icon="@drawable/ic_favorite"
+            android:title="@string/favorites" />
+        
+        <item
+            android:id="@+id/shoppingListFragment"
+            android:icon="@drawable/ic_shopping"
+            android:title="@string/shopping_list" />
+        
+        <item
+            android:id="@+id/weeklyPlanFragment"
+            android:icon="@drawable/ic_calendar"
+            android:title="@string/weekly_plan" />
+        
+        <item
+            android:id="@+id/storeMapFragment"
+            android:icon="@drawable/ic_map"
+            android:title="@string/stores" />
+    </group>
+    
+    <item android:title="@string/settings">
+        <menu>
+            <item
+                android:id="@+id/settingsFragment"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/settings" />
+        </menu>
+    </item>
+    
+</menu>

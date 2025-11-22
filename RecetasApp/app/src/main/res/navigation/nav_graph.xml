@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.recetasapp.ui.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_home_to_recipeDetail"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Recipe Detail Fragment -->
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.example.recetasapp.ui.detail.RecipeDetailFragment"
+        android:label="@string/recipe_image"
+        tools:layout="@layout/fragment_recipe_detail">
+
+        <argument
+            android:name="recipeId"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_detail_to_cookingMode"
+            app:destination="@id/cookingModeActivity" />
+    </fragment>
+
+    <!-- Search Fragment -->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.recetasapp.ui.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_search_to_recipeDetail"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
+
+    <!-- Community Fragment -->
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.example.recetasapp.ui.community.CommunityFragment"
+        android:label="@string/community"
+        tools:layout="@layout/fragment_community">
+
+        <action
+            android:id="@+id/action_community_to_uploadRecipe"
+            app:destination="@id/uploadRecipeFragment" />
+
+        <action
+            android:id="@+id/action_community_to_recipeDetail"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
+
+    <!-- Upload Recipe Fragment -->
+    <fragment
+        android:id="@+id/uploadRecipeFragment"
+        android:name="com.example.recetasapp.ui.community.UploadRecipeFragment"
+        android:label="@string/upload_recipe"
+        tools:layout="@layout/fragment_upload_recipe" />
+
+    <!-- Profile Fragment -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.recetasapp.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profile_to_settings"
+            app:destination="@id/settingsFragment" />
+
+        <action
+            android:id="@+id/action_profile_to_editProfile"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <!-- Favorites Fragment -->
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.recetasapp.ui.favorites.FavoritesFragment"
+        android:label="@string/favorites"
+        tools:layout="@layout/fragment_favorites">
+
+        <action
+            android:id="@+id/action_favorites_to_recipeDetail"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
+
+    <!-- Shopping List Fragment -->
+    <fragment
+        android:id="@+id/shoppingListFragment"
+        android:name="com.example.recetasapp.ui.shoppinglist.ShoppingListFragment"
+        android:label="@string/shopping_list"
+        tools:layout="@layout/fragment_shopping_list" />
+
+    <!-- Weekly Plan Fragment -->
+    <fragment
+        android:id="@+id/weeklyPlanFragment"
+        android:name="com.example.recetasapp.ui.weeklyplan.WeeklyPlanFragment"
+        android:label="@string/weekly_plan"
+        tools:layout="@layout/fragment_weekly_plan">
+
+        <action
+            android:id="@+id/action_weeklyPlan_to_shoppingList"
+            app:destination="@id/shoppingListFragment" />
+    </fragment>
+
+    <!-- Store Map Fragment -->
+    <fragment
+        android:id="@+id/storeMapFragment"
+        android:name="com.example.recetasapp.ui.map.StoreMapFragment"
+        android:label="@string/stores"
+        tools:layout="@layout/fragment_store_map" />
+
+    <!-- Settings Fragment -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.recetasapp.ui.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings">
+
+        <action
+            android:id="@+id/action_settings_to_editProfile"
+            app:destination="@id/editProfileFragment" />
+
+        <action
+            android:id="@+id/action_settings_to_notifications"
+            app:destination="@id/notificationsFragment" />
+
+        <action
+            android:id="@+id/action_settings_to_language"
+            app:destination="@id/languageFragment" />
+
+        <action
+            android:id="@+id/action_settings_to_about"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+
+    <!-- Edit Profile Fragment -->
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.recetasapp.ui.profile.EditProfileFragment"
+        android:label="@string/edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+
+    <!-- Notifications Fragment -->
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.recetasapp.ui.settings.NotificationsFragment"
+        android:label="@string/notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <!-- Language Fragment -->
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.example.recetasapp.ui.settings.LanguageFragment"
+        android:label="@string/language"
+        tools:layout="@layout/fragment_language" />
+
+    <!-- About Fragment -->
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.recetasapp.ui.settings.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+    tools:layout="@layout/fragment_edit_profile" />
+
+    <!-- Cooking Mode Activity (separate activity) -->
+    <activity
+        android:id="@+id/cookingModeActivity"
+        android:name="com.example.recetasapp.ui.cookingmode.CookingModeActivity"
+        android:label="@string/cooking_mode"
+        tools:layout="@layout/activity_cooking_mode" />
+
+</navigation>

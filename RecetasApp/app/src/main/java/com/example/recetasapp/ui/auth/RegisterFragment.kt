@@ -15,6 +15,7 @@ import com.example.recetasapp.R
 import com.example.recetasapp.data.local.database.DatabaseBuilder
 import com.example.recetasapp.data.repository.AuthRepository
 import com.example.recetasapp.utils.PreferencesHelper
+import com.example.recetasapp.utils.SupabaseModule
 import com.example.recetasapp.utils.isValidEmail
 import com.example.recetasapp.utils.isValidPassword
 import com.example.recetasapp.utils.showToast
@@ -54,7 +55,7 @@ class RegisterFragment : Fragment() {
     //
     private fun initViewModel() {
         val database = DatabaseBuilder.getInstance(requireContext())
-        val repository = AuthRepository(database.userDao()) // Crea el AuthRepository
+        val repository = AuthRepository(database.userDao(),SupabaseModule.client) // Crea el AuthRepository
         val factory = AuthViewModelFactory(repository) //Crea el AuthViewModel
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
         

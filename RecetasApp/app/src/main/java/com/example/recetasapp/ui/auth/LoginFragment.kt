@@ -8,16 +8,29 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.credentials.CredentialManager
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.exceptions.GetCredentialCancellationException
+import androidx.credentials.exceptions.GetCredentialException
+import androidx.credentials.exceptions.NoCredentialException
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.recetasapp.MainActivity
 import com.example.recetasapp.R
 import com.example.recetasapp.data.local.database.DatabaseBuilder
 import com.example.recetasapp.data.repository.AuthRepository
 import com.example.recetasapp.utils.PreferencesHelper
+import com.example.recetasapp.utils.SupabaseModule
 import com.example.recetasapp.utils.isValidEmail
 import com.example.recetasapp.utils.isValidPassword
 import com.example.recetasapp.utils.showToast
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import kotlinx.coroutines.launch
+import java.security.MessageDigest
+import java.util.UUID
 
 // Fragmen que representa la pantalla de inicio de sesión de la app.
 class LoginFragment : Fragment() {
@@ -53,7 +66,7 @@ class LoginFragment : Fragment() {
     }
     private fun initViewModel() {
         val database = DatabaseBuilder.getInstance(requireContext())
-        val repository = AuthRepository(database.userDao()) // Crea el AuthRepository
+        val repository = AuthRepository(database.userDao(), SupabaseModule.client) // Crea el AuthRepository
         val factory = AuthViewModelFactory(repository) //Crea el AuthViewModel
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
         
@@ -105,7 +118,9 @@ class LoginFragment : Fragment() {
         }
         
         googleButton.setOnClickListener {
-            requireContext().showToast("Google login próximamente")
+            viewLifecycleOwner.lifecycleScope.launch {
+                attemptGoogleLogin()
+            }
         }
         
         guestButton.setOnClickListener {
@@ -140,6 +155,58 @@ class LoginFragment : Fragment() {
         
         // Ejecutar login
         viewModel.login(email, password)
+    }
+
+    private suspend fun attemptGoogleLogin() {
+        try {
+            val credentialManager = CredentialManager.create(requireContext())
+
+            // Generar Nonce y su hash
+            val rawNonce = UUID.randomUUID().toString()
+            val bytes = rawNonce.toByteArray()
+            val md = MessageDigest.getInstance("SHA-256")
+            val digest = md.digest(bytes)
+            val hashedNonce = digest.fold("") { str, it -> str + "%02x".format(it) }
+
+            // Crear la petición a Google
+            val googleIdOption = GetGoogleIdOption.Builder()
+                .setFilterByAuthorizedAccounts(false)
+                .setServerClientId("376412656346-u7e76p7dgo1a2s6rqspft5nbotfr4soc.apps.googleusercontent.com")
+                .setNonce(hashedNonce)
+                .build()
+
+            val request = GetCredentialRequest.Builder()
+                .addCredentialOption(googleIdOption)
+                .build()
+
+            // Mostrar el diálogo de Google y obtener credencial
+            val result = credentialManager.getCredential(
+                request = request,
+                context = requireContext(),
+            )
+            val googleIdTokenCredential =
+                GoogleIdTokenCredential.createFrom(result.credential.data)
+            val googleIdToken = googleIdTokenCredential.idToken
+
+            // Llamar al ViewModel con el token y el nonce
+            viewModel.loginWithGoogle(googleIdToken, rawNonce)
+
+        } catch (e: GetCredentialCancellationException) {
+            // El usuario cerró la ventana de selección de cuenta. No es necesario hacer nada.
+        } catch (e: NoCredentialException) {
+            // El dispositivo no tiene ninguna cuenta de Google configurada.
+            requireContext().showToast("Para iniciar sesión, primero añade una cuenta de Google a tu dispositivo")
+        } catch (e: GetCredentialException) {
+            // Para cualquier otro error relacionado con la obtención de credenciales.
+            android.util.Log.e("GoogleLogin", "Error de credencial no esperado", e)
+            requireContext().showToast("No se pudo iniciar sesión con Google en este momento")
+        } catch (e: GoogleIdTokenParsingException) {
+            android.util.Log.e("GoogleLogin", "Error al parsear el token de Google", e)
+            requireContext().showToast("Error al procesar la respuesta de Google")
+        } catch (e: Exception) {
+            android.util.Log.e("GoogleLogin", "Error inesperado durante el login con Google", e)
+            requireContext().showToast("Ocurrió un error inesperado: ${e.message}")
+        }
     }
     
     private fun navigateToMain() {

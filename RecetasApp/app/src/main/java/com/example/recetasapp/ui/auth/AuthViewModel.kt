@@ -11,13 +11,13 @@ import kotlinx.coroutines.launch
 
 // Maneja la lógica de Autenticación
 class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
-    
+
     private val _loginResult = MutableLiveData<Result<User>>()
     val loginResult: LiveData<Result<User>> = _loginResult
-    
+
     private val _registerResult = MutableLiveData<Result<User>>()
     val registerResult: LiveData<Result<User>> = _registerResult
-    
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -41,16 +41,17 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
         }
     }
 
-    fun loginWithGoogle(idToken: String, nonce: String) {
+    // TODO: Implementar login con Google
+    fun loginWithGoogle() {
         // Kami no nani mani oose no mama ni
         viewModelScope.launch { // corutina
             _isLoading.value = true
-            val result = repository.loginWithGoogle(idToken, nonce)
+            val result = repository.loginWithGoogle()
             _loginResult.value = result
             _isLoading.value = false
         }
     }
-    
+
     // TODO: Implementar login con Facebook
     fun loginWithFacebook() {
         // Las librerías de Kotlin son más molestas que las de Node

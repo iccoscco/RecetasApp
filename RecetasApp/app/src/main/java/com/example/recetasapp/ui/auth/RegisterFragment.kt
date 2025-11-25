@@ -15,17 +15,16 @@ import com.example.recetasapp.R
 import com.example.recetasapp.data.local.database.DatabaseBuilder
 import com.example.recetasapp.data.repository.AuthRepository
 import com.example.recetasapp.utils.PreferencesHelper
-import com.example.recetasapp.utils.SupabaseModule
 import com.example.recetasapp.utils.isValidEmail
 import com.example.recetasapp.utils.isValidPassword
 import com.example.recetasapp.utils.showToast
 
 // Fragment que maneja la pantalla de registro de usuarios
 class RegisterFragment : Fragment() {
-    
+
     private lateinit var viewModel: AuthViewModel
     private lateinit var preferencesHelper: PreferencesHelper
-    
+
     private lateinit var usernameEditText: EditText
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
@@ -45,7 +44,7 @@ class RegisterFragment : Fragment() {
     // Inicializa el ViewModel (initViewModel) y configura observadores (setupObservers) y listeners de botones (setupListeners).
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         initViewModel()
         initViews(view)
         setupObservers()
@@ -55,10 +54,10 @@ class RegisterFragment : Fragment() {
     //
     private fun initViewModel() {
         val database = DatabaseBuilder.getInstance(requireContext())
-        val repository = AuthRepository(database.userDao(),SupabaseModule.client) // Crea el AuthRepository
+        val repository = AuthRepository(database.userDao()) // Crea el AuthRepository
         val factory = AuthViewModelFactory(repository) //Crea el AuthViewModel
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
-        
+
         preferencesHelper = PreferencesHelper(requireContext())
     }
 
@@ -71,7 +70,7 @@ class RegisterFragment : Fragment() {
         registerButton = view.findViewById(R.id.register_button)
         loginLink = view.findViewById(R.id.login_link)
     }
-    
+
     private fun setupObservers() {
         viewModel.registerResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { user ->
@@ -82,63 +81,63 @@ class RegisterFragment : Fragment() {
                 requireContext().showToast("Error: ${error.message}")
             }
         }
-        
+
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             registerButton.isEnabled = !isLoading
         }
     }
-    
+
     private fun setupListeners() {
         registerButton.setOnClickListener {
             attemptRegister()
         }
-        
+
         loginLink.setOnClickListener {
             (activity as? AuthActivity)?.showLoginFragment()
         }
     }
-    
+
     private fun attemptRegister() {
         val username = usernameEditText.text.toString().trim()
         val email = emailEditText.text.toString().trim()
         val password = passwordEditText.text.toString()
         val confirmPassword = confirmPasswordEditText.text.toString()
-        
+
         // Validaciones
         if (username.isEmpty()) {
             usernameEditText.error = "Ingresa tu nombre de usuario"
             return
         }
-        
+
         if (email.isEmpty()) {
             emailEditText.error = "Ingresa tu email"
             return
         }
-        
+
         if (!email.isValidEmail()) {
             emailEditText.error = "Email inválido"
             return
         }
-        
+
         if (password.isEmpty()) {
             passwordEditText.error = "Ingresa tu contraseña"
             return
         }
-        
+
         if (!password.isValidPassword()) {
             passwordEditText.error = "La contraseña debe tener al menos 6 caracteres"
             return
         }
-        
+
         if (password != confirmPassword) {
             confirmPasswordEditText.error = "Las contraseñas no coinciden"
             return
         }
-        
+
         // Ejecutar registro
         viewModel.register(email, password, username)
     }
-    
+
     private fun navigateToMain() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

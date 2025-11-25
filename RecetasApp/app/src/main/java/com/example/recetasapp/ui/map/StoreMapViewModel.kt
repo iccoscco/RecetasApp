@@ -12,10 +12,14 @@ data class Store(
 
 class StoreMapViewModel : ViewModel() {
 
-    private val _nearbyStores = MutableLiveData<List<Store>>()
-    val nearbyStores: LiveData<List<Store>> = _nearbyStores
+    // Lista original con todas las tiendas
+    private var allStores: List<Store> = emptyList()
 
-    private val _userLocation = MutableLiveData<Pair<Double, Double>>()
+    private val _filteredStores = MutableLiveData<List<Store>>()
+    val filteredStores: LiveData<List<Store>> = _filteredStores
+
+    // Ubicación del usuario
+    private val _userLocation = MutableLiveData(Pair(-16.406452, -71.524666))
     val userLocation: LiveData<Pair<Double, Double>> = _userLocation
 
     init {
@@ -23,8 +27,25 @@ class StoreMapViewModel : ViewModel() {
     }
 
     fun loadNearbyStores() {
-        // TODO: Cargar tiendas cercanas usando Google Places API
-        _nearbyStores.value = emptyList()
+        allStores = listOf(
+            Store("1", "Mercado San Camilo", -16.401918, -71.536767, 1.2),
+            Store("2", "Supermercado Franco", -16.409395, -71.543477, 2.1),
+            Store("3", "Tienda 'El Vecino'", -16.397576, -71.529881, 1.5),
+            Store("4", "Plaza Vea Arequipa Center", -16.392931, -71.551790, 3.0),
+            Store("5", "Tottus Parque Lambramani", -16.421715, -71.526543, 2.8)
+        )
+        _filteredStores.value = allStores
+    }
+
+    fun searchStores(query: String) {
+        val filtered = if (query.isBlank()) {
+            allStores
+        } else {
+            allStores.filter { store ->
+                store.name.contains(query, ignoreCase = true)
+            }
+        }
+        _filteredStores.value = filtered
     }
 
     fun updateUserLocation(latitude: Double, longitude: Double) {

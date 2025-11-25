@@ -108,6 +108,7 @@ dependencies {
 
     // OpenStreetMap
     implementation("org.osmdroid:osmdroid-android:6.1.2")
+    implementation("com.github.MKergall:osmbonuspack:6.9.0")
 }
 
 configurations.all {

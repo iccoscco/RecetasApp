@@ -1,6 +1,7 @@
 package com.example.recetasapp
 
 import android.os.Bundle
+import android.preference.PreferenceManager.getDefaultSharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -13,6 +14,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.NavigationUI
 import androidx.activity.addCallback
+import org.osmdroid.config.Configuration
 
 /**
  * MainActivity - Actividad principal de la aplicación
@@ -34,6 +36,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // configuracion para el mapa
+        Configuration.getInstance().load(
+            applicationContext,
+            getDefaultSharedPreferences(applicationContext)
+        )
+
         setContentView(R.layout.activity_main)
 
         // Ocultar el ActionBar

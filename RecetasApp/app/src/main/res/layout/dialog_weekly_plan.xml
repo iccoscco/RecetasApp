@@ -1,0 +1,38 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <include android:id="@+id/includeMonday" layout="@layout/item_plan_day"/>
+        <include android:id="@+id/includeTuesday" layout="@layout/item_plan_day"/>
+        <include android:id="@+id/includeWednesday" layout="@layout/item_plan_day"/>
+        <include android:id="@+id/includeThursday" layout="@layout/item_plan_day"/>
+        <include android:id="@+id/includeFriday" layout="@layout/item_plan_day"/>
+        <include android:id="@+id/includeSaturday" layout="@layout/item_plan_day"/>
+        <include android:id="@+id/includeSunday" layout="@layout/item_plan_day"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal">
+
+            <Button android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btnSavePlan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Guardar"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

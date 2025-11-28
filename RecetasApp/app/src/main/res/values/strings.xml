@@ -73,6 +73,7 @@
     <string name="apply_filters">Aplicar filtros</string>
     <string name="clear_filters">Limpiar filtros</string>
     <string name="no_results">No se encontraron resultados</string>
+    <string name="search_stores">Buscar tiendas...</string>
 
     <!-- Profile -->
     <string name="edit_profile">Editar perfil</string>

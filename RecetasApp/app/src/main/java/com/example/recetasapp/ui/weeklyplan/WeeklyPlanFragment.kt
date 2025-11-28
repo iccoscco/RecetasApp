@@ -4,77 +4,69 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.recetasapp.R
-import com.example.recetasapp.ui.weeklyplan.adapters.WeeklyPlanAdapter
-import com.example.recetasapp.utils.showToast
+import com.example.recetasapp.databinding.FragmentWeeklyPlanBinding
+import com.example.recetasapp.data.model.WeeklyPlan
+import com.example.recetasapp.data.repository.RecipeRepository
+import com.example.recetasapp.data.remote.api.MealDbApi
+import com.example.recetasapp.ui.home.HomeViewModel
+import com.example.recetasapp.ui.home.HomeViewModelFactory
+import com.example.recetasapp.utils.Constants
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class WeeklyPlanFragment : Fragment() {
 
+    private lateinit var binding: FragmentWeeklyPlanBinding
     private lateinit var viewModel: WeeklyPlanViewModel
-    private lateinit var adapter: WeeklyPlanAdapter
-
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var generateShoppingListButton: Button
+    private lateinit var recipesViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_weekly_plan, container, false)
-    }
+    ): View {
+        binding = FragmentWeeklyPlanBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[WeeklyPlanViewModel::class.java]
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        // Instanciación correcta de la API MealDbApi usando Retrofit
+        val api = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(MealDbApi::class.java)
 
-        initViewModel()
-        initViews(view)
-        setupRecyclerView()
-        setupListeners()
-        setupObservers()
-    }
+        val recipeRepository = RecipeRepository(api)
+        val factory = HomeViewModelFactory(recipeRepository)
+        recipesViewModel = ViewModelProvider(requireActivity(), factory)[HomeViewModel::class.java]
 
-    private fun initViewModel() {
-        val factory = WeeklyPlanViewModelFactory()
-        viewModel = ViewModelProvider(this, factory)[WeeklyPlanViewModel::class.java]
-    }
-
-    private fun initViews(view: View) {
-        recyclerView = view.findViewById(R.id.weekly_recycler_view)
-        generateShoppingListButton = view.findViewById(R.id.generate_shopping_list_button)
-    }
-
-    private fun setupRecyclerView() {
-        adapter = WeeklyPlanAdapter { meal ->
-            requireContext().showToast("Meal: ${meal.name}")
+        val adapter = WeeklyPlanAdapter(emptyList()) { plan ->
+            viewModel.removeWeeklyPlan(plan)
         }
 
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = this@WeeklyPlanFragment.adapter
-        }
-    }
+        binding.rvWeeklyPlans.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvWeeklyPlans.adapter = adapter
 
-    private fun setupListeners() {
-        generateShoppingListButton.setOnClickListener {
-            viewModel.generateShoppingList()
-        }
-    }
-
-    private fun setupObservers() {
-        viewModel.weeklyMeals.observe(viewLifecycleOwner) { meals ->
-            adapter.submitList(meals)
+        viewModel.plans.observe(viewLifecycleOwner) { plans ->
+            adapter.updateData(plans)
         }
 
-        viewModel.message.observe(viewLifecycleOwner) { message ->
-            message?.let {
-                requireContext().showToast(it)
+        recipesViewModel.recipes.observe(viewLifecycleOwner) { allRecipes ->
+            binding.fabAddPlan.isEnabled = allRecipes.isNotEmpty()
+            binding.fabAddPlan.setOnClickListener {
+                WeeklyPlanDialog(
+                    requireContext(),
+                    allRecipes,
+                    allRecipes,
+                    allRecipes
+                ) { newPlan ->
+                    viewModel.addWeeklyPlan(newPlan)
+                }.show()
             }
         }
+
+        return binding.root
     }
 }

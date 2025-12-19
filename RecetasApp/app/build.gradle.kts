@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.androidx.navigation.safe.args)
+    kotlin("plugin.serialization") version "2.1.0"
 }
 
 android {
@@ -109,6 +110,17 @@ dependencies {
     // OpenStreetMap
     implementation("org.osmdroid:osmdroid-android:6.1.2")
     implementation("com.github.MKergall:osmbonuspack:6.9.0")
+
+    // Supabase
+    implementation(platform("io.github.jan-tennert.supabase:bom:2.4.1"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt")
+    implementation("io.ktor:ktor-client-android:2.3.12")
+
+    // Google sign in
+    implementation("androidx.credentials:credentials:1.6.0-beta03")
+    implementation("androidx.credentials:credentials-play-services-auth:1.6.0-beta03")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 }
 
 configurations.all {

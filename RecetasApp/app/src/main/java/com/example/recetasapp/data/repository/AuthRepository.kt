@@ -3,11 +3,16 @@ package com.example.recetasapp.data.repository
 import com.example.recetasapp.data.local.dao.UserDao
 import com.example.recetasapp.data.local.entities.UserEntity
 import com.example.recetasapp.data.model.User
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.gotrue.auth
+import io.github.jan.supabase.gotrue.providers.Google
+import io.github.jan.supabase.gotrue.providers.builtin.IDToken
+import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 // Lógica de autenticación
-class AuthRepository(private val userDao: UserDao) {
+class AuthRepository(private val userDao: UserDao, private val supabaseClient: SupabaseClient) {
 
     // Logearse
     suspend fun login(email: String, password: String): Result<User> = withContext(Dispatchers.IO) {
@@ -56,9 +61,35 @@ class AuthRepository(private val userDao: UserDao) {
     }
 
     // Implementar (Login Google)
-    suspend fun loginWithGoogle(): Result<User> {
-        // Amor de lejos amor de pend.... lalalal
-        return Result.failure(Exception("Login con Google aún no implementado"))
+    suspend fun loginWithGoogle(idToken: String, nonce: String): Result<User> = withContext(Dispatchers.IO) {
+        try {
+            // Llama a Supabase para iniciar sesión con el token
+            supabaseClient.auth.signInWith(IDToken) {
+                this.idToken = idToken
+                this.provider = Google
+                this.nonce = nonce
+            }
+
+            // Obtiene el usuario de Supabase después del login exitoso
+            val supabaseUser = supabaseClient.auth.currentUserOrNull()
+            if (supabaseUser != null) {
+                // TODO: Buscar si el usuario ya existe en tu base de datos local por email.
+                // Si no existe, créalo. Si existe, actualiza sus datos si es necesario.
+                val user = User(
+                    id = 0,
+                    email = supabaseUser.email ?: "",
+                    username = supabaseUser.userMetadata?.get("name")?.toString()?.replace("\"", "") ?: "Usuario de Google",
+                    profileImageUrl = supabaseUser.userMetadata?.get("avatar_url")?.toString()?.replace("\"", ""),
+                )
+                // Por ahora, simplemente devolvemos el usuario mapeado
+                Result.success(user)
+            } else {
+                Result.failure(Exception("No se pudo obtener el usuario de Supabase después del login."))
+            }
+
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     // Implementar (Login Facebook)

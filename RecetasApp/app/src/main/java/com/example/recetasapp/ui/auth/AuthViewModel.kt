@@ -42,11 +42,11 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
     }
 
     // TODO: Implementar login con Google
-    fun loginWithGoogle() {
+    fun loginWithGoogle(idToken: String, nonce: String) {
         // Kami no nani mani oose no mama ni
         viewModelScope.launch { // corutina
             _isLoading.value = true
-            val result = repository.loginWithGoogle()
+            val result = repository.loginWithGoogle(idToken, nonce)
             _loginResult.value = result
             _isLoading.value = false
         }
